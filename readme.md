@@ -44,3 +44,6 @@ WHERE
 
  - No JS funções são **cidadões de primeira classe.**
    - Usma função consegue receber uma função como parâmetro e uma variável consegue receber uma função.
+
+# Funções
+

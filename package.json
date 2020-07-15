@@ -1,0 +1,8 @@
+{
+  "name": "js-funcional-reativo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Vyctor/js-funcional-reativo.git",
+  "author": "Vyctor <dev.vyctor@gmail.com>",
+  "license": "MIT"
+}
