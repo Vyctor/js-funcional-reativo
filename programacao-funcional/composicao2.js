@@ -10,6 +10,7 @@ function composicao(...funcoes) {
     }, valor);
   };
 }
+
 function gritar(texto) {
   return texto.toUpperCase();
 }
