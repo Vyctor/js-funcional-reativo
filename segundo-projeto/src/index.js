@@ -18,6 +18,7 @@ const simbolos = [
   "]",
   "(",
   ")",
+  "!",
 ];
 
 function agruparPalavras(palavras) {
@@ -47,7 +48,8 @@ fn.readPath(dirPath)
     fn.readFile(),
     fn.separateTextBy("\n"),
     fn.removeElementIfEmpty(),
-    fn.removeElementIfOnlyNumbers()
+    fn.removeElementIfOnlyNumbers(),
+    fn.removeSymbols(simbolos)
     //first()
   )
   .subscribe(console.log);

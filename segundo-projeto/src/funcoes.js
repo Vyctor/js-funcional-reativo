@@ -70,6 +70,17 @@ function removeElementIfOnlyNumbers() {
   }));
 }
 
+function removeSymbols(symbols) {
+  return createPipeableOperator((subscriber) => ({
+    next(text) {
+      const textWithoutSymbols = symbols.reduce((acc, symbol) => {
+        return acc.splite(symbol).join("");
+      }, text);
+      subscriber.next(textWithoutSymbols);
+    },
+  }));
+}
+
 function createPipeableOperator(operatorFn) {
   return function (source) {
     return Observable.create((subscriber) => {
@@ -90,4 +101,5 @@ module.exports = {
   separateTextBy,
   removeElementIfEmpty,
   removeElementIfOnlyNumbers,
+  removeSymbols,
 };
