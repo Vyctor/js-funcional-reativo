@@ -46,7 +46,8 @@ fn.readPath(dirPath)
     fn.elementsEndingWith(".srt"),
     fn.readFile(),
     fn.separateTextBy("\n"),
-    fn.removeElementIfEmpty()
+    fn.removeElementIfEmpty(),
+    fn.removeElementIfOnlyNumbers()
     //first()
   )
   .subscribe(console.log);

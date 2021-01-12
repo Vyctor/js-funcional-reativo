@@ -61,6 +61,15 @@ function removeElementIfEmpty() {
   }));
 }
 
+function removeElementIfOnlyNumbers() {
+  return createPipeableOperator((subscriber) => ({
+    next(text) {
+      const number = parseInt(text.trim());
+      if (number !== number) subscriber.next(text);
+    },
+  }));
+}
+
 function createPipeableOperator(operatorFn) {
   return function (source) {
     return Observable.create((subscriber) => {
@@ -80,4 +89,5 @@ module.exports = {
   readFile,
   separateTextBy,
   removeElementIfEmpty,
+  removeElementIfOnlyNumbers,
 };
