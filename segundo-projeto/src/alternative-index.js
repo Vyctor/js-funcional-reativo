@@ -1,6 +1,13 @@
 const path = require("path");
 const fn = require("./funcoes");
-const { first, toArray, map } = require("rxjs/operators");
+const {
+  first,
+  toArray,
+  map,
+  groupBy,
+  mergeMap,
+  reduce,
+} = require("rxjs/operators");
 const _ = require("lodash");
 
 const dirPath = path.join(__dirname, "legendas");
@@ -56,8 +63,10 @@ fn.readPath(dirPath)
     fn.separateTextBy(" "),
     fn.removeElementIfEmpty(),
     fn.removeElementIfOnlyNumbers(),
+    groupBy((element) => element),
+    mergeMap((group) => group.pipe(toArray())),
+    map((words) => ({ element: words[0], qtde: words.length })),
     toArray(),
-    fn.groupWords(),
-    map((array) => _.sortBy(array, (element) => -element.qtd))
+    map((array) => _.sortBy(array, (element) => -element.qtde))
   )
   .subscribe(console.log);
