@@ -40,6 +40,27 @@ function readFile() {
   }));
 }
 
+function separateTextBy(symbol) {
+  return createPipeableOperator((subscriber) => ({
+    next(text) {
+      text.split(symbol).forEach((part) => {
+        subscriber.next(part);
+      });
+      subscriber.complete();
+    },
+  }));
+}
+
+function removeElementIfEmpty() {
+  return createPipeableOperator((subscriber) => ({
+    next(text) {
+      if (text.trim()) {
+        subscriber.next(text);
+      }
+    },
+  }));
+}
+
 function createPipeableOperator(operatorFn) {
   return function (source) {
     return Observable.create((subscriber) => {
@@ -53,4 +74,10 @@ function createPipeableOperator(operatorFn) {
   };
 }
 
-module.exports = { readPath, elementsEndingWith, readFile };
+module.exports = {
+  readPath,
+  elementsEndingWith,
+  readFile,
+  separateTextBy,
+  removeElementIfEmpty,
+};

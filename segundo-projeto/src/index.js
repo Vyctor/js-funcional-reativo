@@ -1,6 +1,6 @@
 const path = require("path");
 const fn = require("./funcoes");
-
+const { first } = require("rxjs/operators");
 const dirPath = path.join(__dirname, "legendas");
 
 const simbolos = [
@@ -42,5 +42,11 @@ function ordenarPorAtributoNumerico(atributo, ordem) {
 }
 
 fn.readPath(dirPath)
-  .pipe(fn.elementsEndingWith(".srt"), fn.readFile())
+  .pipe(
+    fn.elementsEndingWith(".srt"),
+    fn.readFile(),
+    fn.separateTextBy("\n"),
+    fn.removeElementIfEmpty()
+    //first()
+  )
   .subscribe(console.log);
