@@ -32,7 +32,6 @@ function readFile() {
       try {
         const content = fs.readFileSync(filePath, { encoding: "utf-8" });
         subscriber.next(content.toString());
-        subscriber.complete();
       } catch (error) {
         subscriber.error();
       }
