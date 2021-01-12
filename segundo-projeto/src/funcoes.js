@@ -46,7 +46,6 @@ function separateTextBy(symbol) {
       text.split(symbol).forEach((part) => {
         subscriber.next(part);
       });
-      subscriber.complete();
     },
   }));
 }
@@ -74,7 +73,7 @@ function removeSymbols(symbols) {
   return createPipeableOperator((subscriber) => ({
     next(text) {
       const textWithoutSymbols = symbols.reduce((acc, symbol) => {
-        return acc.splite(symbol).join("");
+        return acc.split(symbol).join("");
       }, text);
       subscriber.next(textWithoutSymbols);
     },
