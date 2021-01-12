@@ -80,6 +80,22 @@ function removeSymbols(symbols) {
   }));
 }
 
+function groupWords() {
+  return createPipeableOperator((subscriber) => ({
+    next(words) {
+      const grouped = Object.values(
+        words.reduce((acc, word) => {
+          const element = word.toLowerCase();
+          const qtd = acc[element] ? acc[element].qtd + 1 : 1;
+          acc[element] = { elemento: element, qtd: qtd };
+          return acc;
+        }, {})
+      );
+      subscriber.next(grouped);
+    },
+  }));
+}
+
 function createPipeableOperator(operatorFn) {
   return function (source) {
     return Observable.create((subscriber) => {
@@ -101,4 +117,5 @@ module.exports = {
   removeElementIfEmpty,
   removeElementIfOnlyNumbers,
   removeSymbols,
+  groupWords,
 };

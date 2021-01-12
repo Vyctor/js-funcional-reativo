@@ -1,6 +1,6 @@
 const path = require("path");
 const fn = require("./funcoes");
-const { first } = require("rxjs/operators");
+const { first, toArray } = require("rxjs/operators");
 const dirPath = path.join(__dirname, "legendas");
 
 const simbolos = [
@@ -53,6 +53,8 @@ fn.readPath(dirPath)
     fn.removeSymbols(simbolos),
     fn.separateTextBy(" "),
     fn.removeElementIfEmpty(),
-    fn.removeElementIfOnlyNumbers()
+    fn.removeElementIfOnlyNumbers(),
+    toArray(),
+    fn.groupWords()
   )
   .subscribe(console.log);
