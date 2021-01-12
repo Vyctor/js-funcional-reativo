@@ -41,4 +41,6 @@ function ordenarPorAtributoNumerico(atributo, ordem) {
   };
 }
 
-fn.readPath(dirPath).subscribe(console.log);
+fn.readPath(dirPath)
+  .pipe(fn.elementsEndingWith(".srt"), fn.readFile())
+  .subscribe(console.log);
